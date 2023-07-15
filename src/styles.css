@@ -1,0 +1,87 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Kalam', cursive;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #fffdfd;
+   
+}
+#addNewDiv:hover, .listItemsDiv:hover, .myCheckbox:hover {
+    background-color: #f4f1f1;
+}
+
+#headDiv {
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem;
+    margin: 1rem 0rem 0.25rem 0rem;
+    background-color: rgb(85, 173, 228);
+    border-top: 2px solid rgb(21, 21, 21);
+    border-bottom: 2px solid rgb(21, 21, 21);
+}
+
+#title {
+    font-size: 3rem;
+    text-shadow:3px 3px#c2bebe;
+}
+
+#footDiv {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+}
+
+#addNewDiv {
+    display: flex;
+    border: 2px solid black;
+    margin: 1rem 6rem 2rem 6rem;
+    padding: 1.5rem 10rem;
+    justify-content: space-evenly;
+}
+
+.listItemsDiv {
+    display: flex;
+    border-bottom: 2px solid black;
+    margin: 0 6rem 1rem 6rem;
+    padding: 1.5rem 4rem;
+    /* justify-content: space-between; */
+    align-items: center;
+    box-shadow: 0px 3px 0px 0px rgb(85, 173, 228);
+}
+
+#checkAndItem {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 3rem;
+}
+
+#itemh2 {
+    padding: 0.4rem;
+    font-size: 1.5rem;
+}
+
+#notes {
+    opacity: 0.6;
+}
+
+#check {
+    display: flex;
+    padding: 0.4rem;
+    margin-right: 4rem;
+}
+
+.myCheckbox {
+    transform: scale(2);
+}
+
+.modal {
+    margin: auto;
+    padding: 2rem;
+    
+}

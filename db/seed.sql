@@ -1,0 +1,1 @@
+INSERT INTO shoppinglist(item,completed,notes)VALUES('milk', false, 'do not forget 2%')

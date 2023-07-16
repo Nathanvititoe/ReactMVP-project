@@ -1,7 +1,8 @@
 import Checkbox from "./Checkbox";
+import { useState, useEffect } from "react";
 
-import { useState } from "react";
-const ListItems = ({ item }) => {
+const ListItems = ({ item, setItems }) => {
+  const URL = 'http://localhost:3001/items'
   const [checked, setChecked] = useState(false);
 
   const handleClick = () => {
@@ -14,15 +15,14 @@ const ListItems = ({ item }) => {
     }
   }
   const deleteItem = async () => {
-    console.log('deleted')
-    const res = await fetch(URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({item, notes}),
+    const res = await fetch(`${URL}/${item.itemid}`, {
+      method: "DELETE"
     });
+    if(res.ok) {
+      setItems(prevItems => prevItems.filter(prevItem => prevItem.itemid !== item.itemid))
+    }
   };
+  
 
   return (
     <>

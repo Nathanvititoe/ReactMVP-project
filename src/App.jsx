@@ -27,7 +27,7 @@ const App = () => {
    <Header />
    <AddNew items={items}/>
    
-   <List className="list" items={items} />
+   <List className="list" items={items} setItems={setItems} />
    <Footer />
     </div>
   )

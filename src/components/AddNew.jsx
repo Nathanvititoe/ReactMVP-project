@@ -5,7 +5,7 @@ const AddNew = () => {
   const [clicked, setClicked] = useState(false);
   const [item, setItem] = useState("");
   const [notes, setNotes] = useState("");
-//   const [submitted, setSubmitted] = useState(false);
+
 
   const handleItemChange = (e) => {
     setItem(e.target.value);
@@ -16,9 +16,6 @@ const AddNew = () => {
   const handleClick = () => {
     setClicked(true);
   };
-//   const submitForm = () => {
-//     setSubmitted(true);
-//   };
 //post one request
 const postData = async () => {
   const res = await fetch(URL, {

@@ -25,7 +25,7 @@ app.use(cors({ origin: "*" }));
 //create GET ALL route for list items
 app.get("/items", async (req, res) => {
   try {
-    const results = await client.query("SELECT * FROM shoppinglist");
+    const results = await client.query("SELECT * FROM shoppinglist ORDER BY itemid ASC");
     if (!results.rows) {
       res.send("bad url ref").status(400);
       return;
@@ -55,17 +55,41 @@ app.post("/items", async (req, res) => {
 //Create DELETE route
 app.delete("/items/:item", async (req, res) => {
   try {
-    const {item} = req.params;
-    const results = await client.query('DELETE FROM shoppinglist WHERE itemid = $1', [item]);
-    if(!results.rows) {
-        console.log('that item does not exist');
-        res.send('that item does not exist').status(404);
-        return;
+    const { item } = req.params;
+    const results = await client.query(
+      "DELETE FROM shoppinglist WHERE itemid = $1",
+      [item]
+    );
+    if (!results.rows) {
+      console.log("that item does not exist");
+      res.send("that item does not exist").status(404);
+      return;
     }
     res.send(results.rows[0]).status(200);
   } catch (err) {
     console.error(err);
     res.send(err).status(500);
+  }
+});
+
+//create put/update route
+app.put("/items/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { item, notes } = req.body;
+    const results = await client.query(
+      "UPDATE shoppinglist SET item = $1, notes = $2 WHERE itemid = $3",
+      [item, notes, id]
+    );
+    if(!results.rows) {
+      console.log("item not found");
+      res.send("item not found").status(404);
+      return;
+    }
+    res.send(results.rows[0]).status(200)
+  } catch (err) {
+    console.error(err);
+    res.send(err).status(500)
   }
 });
 

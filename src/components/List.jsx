@@ -1,3 +1,4 @@
+import AddNew from "./AddNew";
 import ListItems from "./ListItems";
 
 const List = ({ items, setShowItem }) => {
@@ -6,7 +7,7 @@ const List = ({ items, setShowItem }) => {
       item={item}
       key={item.itemid}
       setShowItem={setShowItem}
-    />
+      />
   ));
 };
 export default List;

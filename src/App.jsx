@@ -29,7 +29,7 @@ const App = () => {
   return (
     <div className='container' >
    <Header />
-   <AddNew />
+   <AddNew items={items}/>
    
    <List className="list" items={items} setShowItem={setShowItem}/>
    <Footer />

@@ -55,6 +55,17 @@
     box-shadow: 0px 3px 0px 0px rgb(85, 173, 228);
 }
 
+.listItemsDivClicked {
+    display: flex;
+    border-bottom: 2px solid black;
+    margin: 0 6rem 1rem 6rem;
+    padding: 1.5rem 4rem;
+    align-items: center;
+    box-shadow: 0px 3px 0px 0px rgb(85, 173, 228);
+    text-decoration: line-through;
+    color: rgba(0, 0, 0, 0.5);
+}
+
 #checkAndItem {
     display: flex;
     justify-content: space-between;

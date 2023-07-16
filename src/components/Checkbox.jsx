@@ -1,11 +1,13 @@
-const Checkbox = ({item}) => {
+import {useState} from 'react';
+const Checkbox = ({item, setChecked,checked}) => {
+  const [check, setCheck] = useState(false)
     const handleCheckBox = () => {
-        console.log('checked')
-        //handle post request for marking complete
+      setChecked(!checked);
+        return setCheck(!check)
     }
   return (
     <div id="check">
-     <input className="myCheckbox" type="checkbox" checked={item.completed} onChange={handleCheckBox} />
+     <input className="myCheckbox" type="checkbox" checked={check} onChange={handleCheckBox} />
     </div>
   );
 };

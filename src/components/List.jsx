@@ -1,12 +1,10 @@
-import AddNew from "./AddNew";
 import ListItems from "./ListItems";
 
-const List = ({ items, setShowItem }) => {
+const List = ({ items }) => {
   return items.map((item) => (
     <ListItems
       item={item}
       key={item.itemid}
-      setShowItem={setShowItem}
       />
   ));
 };

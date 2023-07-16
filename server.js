@@ -1,6 +1,6 @@
 import express from "express";
 const app = express();
-import cors from 'cors';
+import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
 import pg from "pg";
@@ -23,21 +23,53 @@ app.use(express.json());
 app.use(cors({ origin: "*" }));
 
 //create GET ALL route for list items
-app.get('/items', async (req,res) => {
-    try {
-        const results = await client.query('SELECT * FROM shoppinglist');
-        if(!results.rows) {
-            res.send('bad url ref').status(400);
-            return;
-        }
-        res.send(results.rows).status(200);
-    } catch(err) {
-        console.error(err);
-        res.send(err).status(500);
+app.get("/items", async (req, res) => {
+  try {
+    const results = await client.query("SELECT * FROM shoppinglist");
+    if (!results.rows) {
+      res.send("bad url ref").status(400);
+      return;
     }
+    res.send(results.rows).status(200);
+  } catch (err) {
+    console.error(err);
+    res.send(err).status(500);
+  }
+});
+
+//create POST/WRITE ONE route
+app.post("/items", async (req, res) => {
+  try {
+    const { item, notes } = req.body;
+    const results = await client.query(
+      "INSERT INTO shoppinglist(item, notes)VALUES($1, $2)",
+      [item, notes]
+    );
+    res.send(results.rows).status(201);
+  } catch (err) {
+    console.error(err);
+    res.send(err).status(500);
+  }
+});
+
+//Create DELETE route
+app.delete("/items/:item", async (req, res) => {
+  try {
+    const {item} = req.params;
+    const results = await client.query('DELETE FROM shoppinglist WHERE itemid = $1', [item]);
+    if(!results.rows) {
+        console.log('that item does not exist');
+        res.send('that item does not exist').status(404);
+        return;
+    }
+    res.send(results.rows[0]).status(200);
+  } catch (err) {
+    console.error(err);
+    res.send(err).status(500);
+  }
 });
 
 //create listener
 app.listen(PORT, () => {
-    console.log("I hear you baby");
-  });
+  console.log("I hear you baby");
+});

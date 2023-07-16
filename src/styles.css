@@ -1,98 +1,148 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Kalam', cursive;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Kalam", cursive;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background-color: #fffdfd;
-   
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #fffdfd;
 }
-#addNewDiv:hover, .listItemsDiv:hover, .myCheckbox:hover {
-    background-color: #f4f1f1;
+
+.myCheckbox:hover {
+  background-color: #f4f1f1;
+}
+
+#addNewDiv:hover,
+.listItemsDiv:hover {
+  background-color: #f4f1f1;
+  transform: scale(1.1);
 }
 
 #headDiv {
-    display: flex;
-    justify-content: center;
-    padding: 1.5rem;
-    margin: 1rem 0rem 0.25rem 0rem;
-    background-color: rgb(85, 173, 228);
-    border-top: 2px solid rgb(21, 21, 21);
-    border-bottom: 2px solid rgb(21, 21, 21);
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem;
+  margin: 1rem 0rem 0.25rem 0rem;
+  background-color: rgb(85, 173, 228);
+  border-top: 2px solid rgb(21, 21, 21);
+  border-bottom: 2px solid rgb(21, 21, 21);
 }
 
 #title {
-    font-size: 3rem;
-    text-shadow:3px 3px#c2bebe;
+  font-size: 3rem;
+  text-shadow: 3px 3px#c2bebe;
 }
 
 #footDiv {
-    display: flex;
-    justify-content: center;
-    margin-top: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
 }
 
 .addNewDiv {
-    display: flex;
-    border: 2px solid black;
-    margin: 1rem 6rem 2rem 6rem;
-    padding: 1.5rem 10rem;
-    justify-content: space-evenly;
+  display: flex;
+  border: 2px solid black;
+  margin: 1rem 6rem 2rem 6rem;
+  padding: 1.5rem 10rem;
+  justify-content: space-evenly;
+  transition: ease all 0.5s;
+  cursor: pointer;
+}
+.addNewDivFormDiv {
+  display: flex;
+  justify-content: center;
+  border-bottom: 2px solid black;
+  margin: 0.5rem 2rem;
+  box-shadow: 0px 3px 0px 0px rgb(85, 173, 228);
+}
+
+form {
+  margin: 0rem 4rem 0rem 4rem;
+}
+
+#addNewItem, #addNewNotes {
+  padding: 0.4rem;
+  margin: 2rem;
+  border-radius: 4px;
+  box-shadow: 1px 1px rgb(67, 68, 69);
+}
+
+#addNewItem:focus, #addNewNotes:focus, #addNewButton:hover {
+    border-color: rgb(85, 173, 228);
+    box-shadow: 0 0 8px 0 rgb(85, 173, 228);;
+  }
+
+#addNewButton {
+    padding: 0.4rem;
+    margin: 2rem;
+    border-radius: 4px;
+    box-shadow: 1px rgb(67, 68, 69);
 }
 
 .listItemsDiv {
-    display: flex;
-    border-bottom: 2px solid black;
-    margin: 0 6rem 1rem 6rem;
-    padding: 1.5rem 4rem;
-    /* justify-content: space-between; */
-    align-items: center;
-    box-shadow: 0px 3px 0px 0px rgb(85, 173, 228);
+  display: flex;
+  border-bottom: 2px solid black;
+  margin: 0 6rem 1rem 6rem;
+  padding: 1.5rem 4rem;
+  /* justify-content: space-between; */
+  align-items: center;
+  box-shadow: 0px 3px 0px 0px rgb(85, 173, 228);
+  transition: ease all 0.2s;
 }
 
 .listItemsDivClicked {
-    display: flex;
-    border-bottom: 2px solid black;
-    margin: 0 6rem 1rem 6rem;
-    padding: 1.5rem 4rem;
-    align-items: center;
-    box-shadow: 0px 3px 0px 0px rgb(85, 173, 228);
-    text-decoration: line-through;
-    color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  border-bottom: 2px solid black;
+  margin: 0 6rem 1rem 6rem;
+  padding: 1.5rem 4rem;
+  align-items: center;
+  box-shadow: 0px 3px 0px 0px rgb(85, 173, 228);
+  text-decoration: line-through;
+  color: rgba(0, 0, 0, 0.5);
 }
 
 #checkAndItem {
-    display: flex;
-    justify-content: space-between;
-    margin-right: 3rem;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 3rem;
 }
 
 #itemh2 {
-    padding: 0.4rem;
-    font-size: 1.5rem;
+  padding: 0.4rem;
+  font-size: 1.5rem;
 }
 
 #notes {
-    opacity: 0.6;
+  opacity: 0.6;
 }
 
 #check {
-    display: flex;
-    padding: 0.4rem;
-    margin-right: 4rem;
+  display: flex;
+  padding: 0.4rem;
+  margin-right: 4rem;
 }
 
 .myCheckbox {
-    transform: scale(2);
+  cursor: pointer;
+  transform: scale(2);
 }
 
-.modal {
-    margin: auto;
-    padding: 2rem;
-    
+#deleteItem {
+  display: flex;
+  align-items: center;
+  padding-right: 1rem;
+  font-size: 1.5rem;
+  color: rgb(196, 47, 47);
+  font-weight: bolder;
+  text-shadow: 0.5px 0.5px black;
+  transition: ease all 0.5s;
+  cursor: pointer;
+}
+
+#deleteItem:hover {
+  transform: scale(1.3);
 }

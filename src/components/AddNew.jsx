@@ -37,8 +37,8 @@ useEffect(() => {
 
   if (clicked) {
     return (
-      <div className="addNewDiv">
-        <form onSubmit={postData}>
+      <div className="addNewDivFormDiv">
+        <form onSubmit={postData} >
           <input
             id="addNewItem"
             type="text"
@@ -46,7 +46,7 @@ useEffect(() => {
             value={item}
             placeholder="What Item do you want?"
             onChange={handleItemChange}
-          />
+            />
           <input
             id="addNewNotes"
             type="text"
@@ -54,8 +54,8 @@ useEffect(() => {
             placeholder="notes..."
             value={notes}
             onChange={handleNotesChange}
-          />
-          <button type="submit">Add To List</button>
+            />
+          <button type="submit" id="addNewButton">Add To List</button>
         </form>
       </div>
     );

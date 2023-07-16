@@ -28,7 +28,7 @@ const ListItems = ({ item, setItems }) => {
     <>
       <div className={checked ? 'listItemsDivClicked' : "listItemsDiv"} >
         <div id="checkAndItem">
-          <p onClick={handleDelete}>x</p>
+          <p onClick={handleDelete} id="deleteItem">x</p>
           <Checkbox item={item} setChecked={setChecked} checked={checked}/>
           <h2 id="itemh2" onClick={handleClick}>{item.item}</h2>
         </div>

@@ -83,6 +83,14 @@ form {
     box-shadow: 1px rgb(67, 68, 69);
 }
 
+#addItemh2 {
+  transition: ease all 0.5s;
+}
+
+#addItemh2:hover {
+  transform: scale(1.2);
+}
+
 .listItemsDiv {
   display: flex;
   border-bottom: 2px solid black;

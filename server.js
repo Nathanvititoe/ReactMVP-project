@@ -25,12 +25,33 @@ app.use(cors({ origin: "*" }));
 //create GET ALL route for list items
 app.get("/items", async (req, res) => {
   try {
-    const results = await client.query("SELECT * FROM shoppinglist ORDER BY itemid ASC");
+    const results = await client.query(
+      "SELECT * FROM shoppinglist ORDER BY itemid ASC"
+    );
     if (!results.rows) {
       res.send("bad url ref").status(400);
       return;
     }
     res.send(results.rows).status(200);
+  } catch (err) {
+    console.error(err);
+    res.send(err).status(500);
+  }
+});
+
+//create GET ONE route for refreshes
+app.get("/items/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const results = await client.query(
+      "SELECT * FROM shoppinglist WHERE itemid = $1",
+      [id]
+    );
+    if(!results.rows[0]) {
+      res.send('item not found').status(404);
+      return;
+    }
+    res.send(results.rows[0]).status(200);
   } catch (err) {
     console.error(err);
     res.send(err).status(500);
@@ -81,15 +102,15 @@ app.put("/items/:id", async (req, res) => {
       "UPDATE shoppinglist SET item = $1, notes = $2 WHERE itemid = $3",
       [item, notes, id]
     );
-    if(!results.rows) {
+    if (!results.rows) {
       console.log("item not found");
       res.send("item not found").status(404);
       return;
     }
-    res.send(results.rows[0]).status(200)
+    res.send(results.rows[0]).status(200);
   } catch (err) {
     console.error(err);
-    res.send(err).status(500)
+    res.send(err).status(500);
   }
 });
 

@@ -1,13 +1,22 @@
 import Checkbox from "./Checkbox";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const ListItems = ({ item, setItems }) => {
   const URL = "http://localhost:3001/items";
   const [checked, setChecked] = useState(false);
   const [currentItem, setCurrentItem] = useState("");
+  const [notes, setNotes] = useState("");
   const [itemSelected, setItemSelected] = useState(false);
   const [notesSelected, setNotesSelected] = useState(false);
 
+  const handleSubmit = async () => {
+    await saveItem();
+   refreshItem();
+  };
+
+  const handleNotesChange = (e) => {
+    setNotes(e.target.value);
+  };
   const handleItemChange = (e) => {
     setCurrentItem(e.target.value);
   };
@@ -35,6 +44,34 @@ const ListItems = ({ item, setItems }) => {
       );
     }
   };
+
+  const saveItem = async () => {
+    const res = await fetch(`${URL}/${item.itemid}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ item: currentItem, notes: notes }),
+    });
+    if (res.ok) {
+      setItemSelected(false);
+      setNotesSelected(false);
+    }
+  };
+
+  const refreshItem = async () => {
+    const res = await fetch(`${URL}/${item.itemid}`);
+    const data = await res.json();
+    setCurrentItem(data.item);
+  };
+
+  // const refreshNotes = async ()  => {
+  //   console.log(item.itemid)
+  //       const res = await fetch(`${URL}/${item.itemid}`);
+  //       const data = await res.json();
+  //       setCurrentItem(data.notes);
+  //     }
+
   if (itemSelected) {
     return (
       <>
@@ -48,7 +85,7 @@ const ListItems = ({ item, setItems }) => {
               type="text"
               placeholder={item.item}
               name="item"
-              value={item.item}
+              value={currentItem}
               onChange={handleItemChange}
               className="selectedItemInput"
             />
@@ -56,11 +93,14 @@ const ListItems = ({ item, setItems }) => {
           <p id="notes" onClick={handleClickNotes}>
             {item.notes}
           </p>
-          <button>save</button>
+          <button type="button" onClick={handleSubmit}>
+            save
+          </button>
         </div>
       </>
     );
   } else if (notesSelected) {
+    console.log(notes);
     return (
       <>
         <div className={checked ? "listItemsDivClicked" : "listItemsDiv"}>
@@ -76,13 +116,15 @@ const ListItems = ({ item, setItems }) => {
               type="text"
               placeholder={item.notes}
               name="notes"
-              value={item.notes}
-              onChange={handleItemChange}
+              value={notes}
+              onChange={handleNotesChange}
               className="selectedNotesInput"
             />
           </div>
 
-          <button>save</button>
+          <button type="button" onClick={handleSubmit}>
+            save
+          </button>
         </div>
       </>
     );

@@ -25,7 +25,7 @@ const App = () => {
   return (
     <div className='container' >
    <Header />
-   <AddNew items={items}/>
+   <AddNew />
    
    <List className="list" items={items} setItems={setItems} />
    <Footer />

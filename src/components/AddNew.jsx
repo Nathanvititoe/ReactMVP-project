@@ -59,7 +59,7 @@ useEffect(() => {
   } else {
     return (
       <div className="addNewDiv" onClick={handleClick}>
-        <h1>+ Add item</h1>
+        <h1 id="addItemh2">+ Add item</h1>
       </div>
     );
   }

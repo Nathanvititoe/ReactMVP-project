@@ -1,33 +1,15 @@
 import Checkbox from "./Checkbox";
 import { useState } from "react";
+import Item from "./Item.jsx";
+import Notes from "./Notes.jsx";
 
-const ListItems = ({ item, setItems }) => {
+const ListItems = ({ item, setItems, items }) => {
   const URL = "http://localhost:3001/items";
   const [checked, setChecked] = useState(false);
-  const [currentItem, setCurrentItem] = useState("");
   const [notes, setNotes] = useState("");
+  const [currentItem, setCurrentItem] = useState("");
   const [itemSelected, setItemSelected] = useState(false);
   const [notesSelected, setNotesSelected] = useState(false);
-
-  const handleSubmit = async () => {
-    await saveItem();
-   refreshItem();
-  };
-
-  const handleNotesChange = (e) => {
-    setNotes(e.target.value);
-  };
-  const handleItemChange = (e) => {
-    setCurrentItem(e.target.value);
-  };
-
-  const handleClickItem = () => {
-    setItemSelected(true);
-  };
-
-  const handleClickNotes = () => {
-    setNotesSelected(true);
-  };
 
   const handleDelete = () => {
     if (confirm("Are you sure you want to delete this item?")) {
@@ -59,95 +41,38 @@ const ListItems = ({ item, setItems }) => {
     }
   };
 
-  const refreshItem = async () => {
-    const res = await fetch(`${URL}/${item.itemid}`);
-    const data = await res.json();
-    setCurrentItem(data.item);
-  };
+  // const refreshItem = async () => {
+  //   const res = await fetch(`${URL}/${item.itemid}`);
+  //   const data = await res.json();
+  //   setCurrentItem(data.item);
+  // };
 
-  // const refreshNotes = async ()  => {
-  //   console.log(item.itemid)
-  //       const res = await fetch(`${URL}/${item.itemid}`);
-  //       const data = await res.json();
-  //       setCurrentItem(data.notes);
-  //     }
-
-  if (itemSelected) {
-    return (
-      <>
-        <div className={checked ? "listItemsDivClicked" : "listItemsDiv"}>
-          <div id="checkAndItem">
-            <p onClick={handleDelete} id="deleteItem">
-              x
-            </p>
-            <Checkbox item={item} setChecked={setChecked} checked={checked} />
-            <input
-              type="text"
-              placeholder={item.item}
-              name="item"
-              value={currentItem}
-              onChange={handleItemChange}
-              className="selectedItemInput"
-            />
-          </div>
-          <p id="notes" onClick={handleClickNotes}>
-            {item.notes}
+  return (
+    <>
+      <div className={checked ? "listItemsDivClicked" : "listItemsDiv"}>
+        <div id="checkAndItem">
+          <p onClick={handleDelete} id="deleteItem">
+            x
           </p>
-          <button type="button" onClick={handleSubmit}>
-            save
-          </button>
+          <Checkbox item={item} setChecked={setChecked} checked={checked} />
+          <Item
+            item={item}
+            setCurrentItem={setCurrentItem}
+            saveItem={saveItem}
+            itemSelected={itemSelected}
+            setItemSelected={setItemSelected}
+          />
         </div>
-      </>
-    );
-  } else if (notesSelected) {
-    console.log(notes);
-    return (
-      <>
-        <div className={checked ? "listItemsDivClicked" : "listItemsDiv"}>
-          <div id="checkAndItem">
-            <p onClick={handleDelete} id="deleteItem">
-              x
-            </p>
-            <Checkbox item={item} setChecked={setChecked} checked={checked} />
-            <h2 id="itemh2" onClick={handleClickItem}>
-              {item.item}
-            </h2>
-            <input
-              type="text"
-              placeholder={item.notes}
-              name="notes"
-              value={notes}
-              onChange={handleNotesChange}
-              className="selectedNotesInput"
-            />
-          </div>
-
-          <button type="button" onClick={handleSubmit}>
-            save
-          </button>
-        </div>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <div className={checked ? "listItemsDivClicked" : "listItemsDiv"}>
-          <div id="checkAndItem">
-            <p onClick={handleDelete} id="deleteItem">
-              x
-            </p>
-            <Checkbox item={item} setChecked={setChecked} checked={checked} />
-            <h2 id="itemh2" onClick={handleClickItem}>
-              {item.item}
-            </h2>
-          </div>
-          <p id="notes" onClick={handleClickNotes}>
-            {item.notes}
-          </p>
-        </div>
-      </>
-    );
-  }
+        <Notes
+          item={item}
+          saveItem={saveItem}
+          notes={notes}
+          setNotes={setNotes}
+          setNotesSelected={setNotesSelected}
+          notesSelected={notesSelected}
+        />
+      </div>
+    </>
+  );
 };
-
 export default ListItems;

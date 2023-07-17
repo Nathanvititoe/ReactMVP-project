@@ -22,6 +22,8 @@ const App = () => {
     getData();
   }, []);
 
+ 
+
   return (
     <div className='container' >
    <Header />

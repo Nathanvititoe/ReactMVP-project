@@ -102,16 +102,16 @@ app.put("/items/:id", async (req, res) => {
       "UPDATE shoppinglist SET item = $1, notes = $2 WHERE itemid = $3",
       [item, notes, id]
     );
-    if (!results.rows) {
+    if (results.rows === 0) {
       console.log("item not found");
-      res.send("item not found").status(404);
+      res.status(404).send("item not found");
       return;
     }
-    res.send(results.rows[0]).status(200);
+    res.status(200).send(results.rows[0]);
   } catch (err) {
     console.error(err);
-    res.send(err).status(500);
-  }
+    res.status(500).send(err);
+  } 
 });
 
 //create listener

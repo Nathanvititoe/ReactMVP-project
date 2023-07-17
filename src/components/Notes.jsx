@@ -5,7 +5,6 @@ const Notes = ({
   item,
   notesSelected,
   setNotesSelected,
-  saveItem,
 }) => {
   const handleClickNotes = () => {
     setNotesSelected(true);
@@ -17,6 +16,20 @@ const Notes = ({
 
   const handleSubmit = async () => {
     await saveItem();
+  };
+
+  const saveItem = async () => {
+    const res = await fetch(`${URL}/${item.itemid}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ item: currentItem, notes: notes }),
+    });
+    if (res.ok) {
+      setItemSelected(false);
+      setNotesSelected(false);
+    }
   };
 
   if (notesSelected) {

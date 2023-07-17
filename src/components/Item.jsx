@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const Item = ({item, setCurrentItem, saveItem, itemSelected, setItemSelected}) => {
+const Item = ({ item, itemSelected, setItemSelected, setSubmitted, currentItem, setCurrentItem }) => {
   
   
   const handleClickItem = (e) => {
@@ -13,21 +13,38 @@ const Item = ({item, setCurrentItem, saveItem, itemSelected, setItemSelected}) =
     // items[index].item = currentItem;
   };
 
-  const handleSubmit = async () => {
-    await saveItem();
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true)
+  }
+  
+  
+ useEffect(() => {
+    if (itemSelected && currentItem !== item.item) {
+      setCurrentItem(item.item);
+    }
+  }, [itemSelected, item.item]);
 
   if (itemSelected) {
     return (
       <>
-        <input  onChange={handleItemChange} />
-        <button type="button" onClick={handleSubmit}>
-          save
-        </button>
+        <form onSubmit={handleSubmit}>
+          <input 
+          value={currentItem}
+          onChange={handleItemChange} 
+          />
+          <button type="submit" className="addNewButton">
+            save
+          </button>
+        </form>
       </>
     );
   } else {
-    return <h2 id="itemh2" onClick={handleClickItem}>{item.item}</h2>;
+    return (
+      <h2 id="itemh2" onClick={handleClickItem}>
+        {item.item}
+      </h2>
+    );
   }
 };
 export default Item;

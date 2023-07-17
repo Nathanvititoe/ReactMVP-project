@@ -1,5 +1,5 @@
 import Checkbox from "./Checkbox";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Item from "./Item.jsx";
 import Notes from "./Notes.jsx";
 
@@ -7,9 +7,10 @@ const ListItems = ({ item, setItems, items }) => {
   const URL = "http://localhost:3001/items";
   const [checked, setChecked] = useState(false);
   const [notes, setNotes] = useState("");
-  const [currentItem, setCurrentItem] = useState("");
+  const [submitted, setSubmitted] = useState(false);
   const [itemSelected, setItemSelected] = useState(false);
   const [notesSelected, setNotesSelected] = useState(false);
+  const [currentItem, setCurrentItem] = useState("");
 
   const handleDelete = () => {
     if (confirm("Are you sure you want to delete this item?")) {
@@ -28,24 +29,31 @@ const ListItems = ({ item, setItems, items }) => {
   };
 
   const saveItem = async () => {
+    
     const res = await fetch(`${URL}/${item.itemid}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ item: currentItem, notes: notes }),
+      body: JSON.stringify({ item: currentItem, notes: notes}),
     });
     if (res.ok) {
       setItemSelected(false);
-      setNotesSelected(false);
+      setItems((prevItems) =>
+      prevItems.map((prevItem) =>
+        prevItem.itemid === item.itemid ? { ...prevItem, item: currentItem, notes: notes } : prevItem
+      )
+    );
     }
   };
+  
 
-  // const refreshItem = async () => {
-  //   const res = await fetch(`${URL}/${item.itemid}`);
-  //   const data = await res.json();
-  //   setCurrentItem(data.item);
-  // };
+  useEffect(() => {
+    if(submitted) {
+      saveItem();
+      setSubmitted(false);
+    }
+  }, [submitted]);
 
   return (
     <>
@@ -56,16 +64,17 @@ const ListItems = ({ item, setItems, items }) => {
           </p>
           <Checkbox item={item} setChecked={setChecked} checked={checked} />
           <Item
+          saveItem={saveItem}
             item={item}
-            setCurrentItem={setCurrentItem}
-            saveItem={saveItem}
             itemSelected={itemSelected}
             setItemSelected={setItemSelected}
+            setSubmitted={setSubmitted}
+            currentItem={currentItem}
+            setCurrentItem={setCurrentItem}
           />
         </div>
         <Notes
           item={item}
-          saveItem={saveItem}
           notes={notes}
           setNotes={setNotes}
           setNotesSelected={setNotesSelected}

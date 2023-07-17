@@ -52,7 +52,7 @@ useEffect(() => {
             value={notes}
             onChange={handleNotesChange}
             />
-          <button type="submit" id="addNewButton">Add To List</button>
+          <button type="submit" className="addNewButton">Add To List</button>
         </form>
       </div>
     );

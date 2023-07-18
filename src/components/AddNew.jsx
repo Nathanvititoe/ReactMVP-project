@@ -26,6 +26,7 @@ const AddNew = ({ completed, URL, getData }) => {
       body: JSON.stringify({ item, notes, completed }),
     });
     getData();
+    e.target.reset();
   };
   useEffect(() => {
     if (item) {
@@ -59,6 +60,7 @@ const AddNew = ({ completed, URL, getData }) => {
         </form>
       </div>
     );
+
   } else {
     return (
       <div className="addNewDiv" onClick={handleClick}>

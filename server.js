@@ -25,7 +25,7 @@ app.use(cors({ origin: "*" }));
 //create GET ALL route for list items
 app.get("/items", async (req, res) => {
   try {
-    const results = await client.query(
+    const results = await db_conn.query(
       "SELECT * FROM shoppinglist ORDER BY itemid ASC"
     );
     if (!results.rows) {
@@ -43,7 +43,7 @@ app.get("/items", async (req, res) => {
 app.get("/items/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const results = await client.query(
+    const results = await db_conn.query(
       "SELECT * FROM shoppinglist WHERE itemid = $1",
       [id]
     );
@@ -62,7 +62,7 @@ app.get("/items/:id", async (req, res) => {
 app.post("/items", async (req, res) => {
   try {
     const { item, notes, completed } = req.body;
-    const results = await client.query(
+    const results = await db_conn.query(
       "INSERT INTO shoppinglist(item, notes,completed)VALUES($1, $2, $3)",
       [item, notes, completed]
     );
@@ -77,7 +77,7 @@ app.post("/items", async (req, res) => {
 app.delete("/items/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const results = await client.query(
+    const results = await db_conn.query(
       "DELETE FROM shoppinglist WHERE itemid = $1",
       [id]
     );
@@ -99,7 +99,7 @@ app.patch("/items/:id", async (req, res) => {
     const { id } = req.params;
     const { item, notes, completed } = req.body;
 
-    const currentItem = await client.query(
+    const currentItem = await db_conn.query(
       "SELECT item, notes, completed FROM shoppinglist WHERE itemid = $1",
       [id]
     );
@@ -117,7 +117,7 @@ app.patch("/items/:id", async (req, res) => {
         completed !== undefined ? completed : currentItem.rows[0].completed, // Retain previous value if not provided
     };
 
-    const results = await client.query(
+    const results = await db_conn.query(
       "UPDATE shoppinglist SET item = $1, notes = $2, completed = $3 WHERE itemid = $4",
       [updatedItem.item, updatedItem.notes, updatedItem.completed, id]
     );

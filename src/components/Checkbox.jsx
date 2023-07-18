@@ -1,51 +1,44 @@
 import { useState, useEffect } from "react";
-const Checkbox = ({ item, setCompleted, completed, URL, setItems }) => {
-  const [click, setClick] = useState(false);
-  const handleCheckBox = () => {
-    const newCompleted = !completed
-    setCompleted(newCompleted);
-    setClick(true);
+const Checkbox = ({ item, URL, setItems }) => {
+//sketch 
+const updatedCheckbox = {...item, completed:!item.completed};
+  const handleClick = async () => {
+    item.completed = !(item.completed)
+    await saveItem(updatedCheckbox);
   };
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   await saveItem();
-  //   setClick(true);
-  // };
 
-  const saveItem = async () => {
+  const saveItem = async (updatedCheckbox) => {
     const res = await fetch(`${URL}/${item.itemid}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ completed: completed }),
+      body: JSON.stringify({ completed: updatedCheckbox.completed }),
     });
-
+    
     if (res.ok) {
       setItems((prevItems) =>
         prevItems.map((prevItem) =>
           prevItem.itemid === item.itemid
-            ? { ...prevItem, completed: completed }
+            ? { ...prevItem, completed: item.completed }
             : prevItem
         )
       );
     }
   };
-  console.log(click);
-  useEffect(() => {
-    if (click) {
-      saveItem();
-      setClick(false);
-    }
-  }, [click]);
-  console.log(item);
+  // console.log(click);
+  // useEffect(() => {
+  //   if (click) {
+  //     saveItem();
+  //   }
+  // }, [click]);
   return (
     <div id="check">
       <input
         className="myCheckbox"
         type="checkbox"
         checked={item.completed}
-        onChange={handleCheckBox}
+        onChange={handleClick}
       />
     </div>
   );

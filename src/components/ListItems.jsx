@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Item from "./Item.jsx";
 import Notes from "./Notes.jsx";
 
-const ListItems = ({ item, setItems, setCompleted, completed }) => {
+const ListItems = ({ item, setItems }) => {
   const URL = "http://localhost:3001/items";
   const [notes, setNotes] = useState("");
   const [currentItem, setCurrentItem] = useState("");
@@ -28,15 +28,13 @@ const ListItems = ({ item, setItems, setCompleted, completed }) => {
 
   return (
     <>
-      <div className={completed ? "listItemsDivClicked" : "listItemsDiv"}>
+      <div className={item.completed ? "listItemsDivClicked" : "listItemsDiv"}>
         <div id="checkAndItem">
           <p onClick={handleDelete} id="deleteItem">
             x
           </p>
           <Checkbox
             item={item}
-            setCompleted={setCompleted}
-            completed={completed}
             URL={URL}
             setItems={setItems}
           />
@@ -48,7 +46,6 @@ const ListItems = ({ item, setItems, setCompleted, completed }) => {
             setCurrentItem={setCurrentItem}
             URL={URL}
             setItems={setItems}
-            setCompleted={setCompleted}
           />
         </div>
         <Notes
@@ -59,7 +56,6 @@ const ListItems = ({ item, setItems, setCompleted, completed }) => {
           notesSelected={notesSelected}
           URL={URL}
           setItems={setItems}
-          setCompleted={setCompleted}
         />
       </div>
     </>

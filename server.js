@@ -113,14 +113,14 @@ app.patch("/items/:id", async (req, res) => {
     const updatedItem = {
       item: item || currentItem.rows[0].item, // Retain previous value if not provided
       notes: notes || currentItem.rows[0].notes, // Retain previous value if not provided
-      completed: completed || currentItem.rows[0].completed // Retain previous value if not provided
+      completed:completed !== undefined ? completed : currentItem.rows[0].completed // Retain previous value if not provided
     };
 
     const results = await client.query(
       "UPDATE shoppinglist SET item = $1, notes = $2, completed = $3 WHERE itemid = $4",
       [updatedItem.item, updatedItem.notes, updatedItem.completed, id]
     );
-
+console.log(req.body)
     res.status(200).send(updatedItem);
   } catch (err) {
     console.error(err);

@@ -8,7 +8,6 @@ const Notes = ({
   URL,
   setItems,
   notes,
-  setCompleted,
 }) => {
   const [submitted, setSubmitted] = useState(false);
 

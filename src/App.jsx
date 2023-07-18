@@ -10,7 +10,6 @@ import "./styles.css";
 const App = () => {
   const URL = "http://localhost:3001/items";
   const [items, setItems] = useState([]);
-  const [completed, setCompleted] = useState(false);
 
   //get all request
   useEffect(() => {
@@ -25,14 +24,12 @@ const App = () => {
   return (
     <div className="container">
       <Header />
-      <AddNew completed={completed} />
+      <AddNew />
 
       <List
         className="list"
         items={items}
         setItems={setItems}
-        setCompleted={setCompleted}
-        completed={completed}
       />
       <Footer />
     </div>

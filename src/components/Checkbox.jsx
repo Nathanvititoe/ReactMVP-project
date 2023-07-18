@@ -7,7 +7,8 @@ const Checkbox = ({ item, URL, setItems }) => {
     await saveItem(updatedCheckbox);
   };
 
-  const saveItem = async (updatedCheckbox) => {
+  const saveItem = async (e, updatedCheckbox) => {
+    e.preventDefault();
     const res = await fetch(`${URL}/${item.itemid}`, {
       method: "PATCH",
       headers: {

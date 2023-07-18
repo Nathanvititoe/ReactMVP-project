@@ -23,7 +23,8 @@ const Item = ({
     e.preventDefault();
     setSubmitted(true);
   };
-  const saveItem = async () => {
+  const saveItem = async (e) => {
+    e.preventDefault();
     const res = await fetch(`${URL}/${item.itemid}`, {
       method: "PATCH",
       headers: {

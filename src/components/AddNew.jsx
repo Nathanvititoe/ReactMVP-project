@@ -15,7 +15,8 @@ const AddNew = ({ completed, URL }) => {
     setClicked(true);
   };
   //post one request
-  const postData = async () => {
+  const postData = async (e) => {
+    e.preventDefault();
     const res = await fetch(URL, {
       method: "POST",
       headers: {

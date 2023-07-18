@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
-const AddNew = ({ completed }) => {
-  const URL = "http://localhost:3001/items";
+const AddNew = ({ completed, URL }) => {
   const [clicked, setClicked] = useState(false);
   const [item, setItem] = useState("");
   const [notes, setNotes] = useState("");

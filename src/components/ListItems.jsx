@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 import Item from "./Item.jsx";
 import Notes from "./Notes.jsx";
 
-const ListItems = ({ item, setItems }) => {
-  const URL = "http://localhost:3001/items";
+const ListItems = ({ item, setItems, URL }) => {
   const [notes, setNotes] = useState("");
   const [currentItem, setCurrentItem] = useState("");
   const [itemSelected, setItemSelected] = useState(false);

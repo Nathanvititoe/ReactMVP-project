@@ -26,12 +26,7 @@ const Checkbox = ({ item, URL, setItems }) => {
       );
     }
   };
-  // console.log(click);
-  // useEffect(() => {
-  //   if (click) {
-  //     saveItem();
-  //   }
-  // }, [click]);
+
   return (
     <div id="check">
       <input

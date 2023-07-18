@@ -8,7 +8,8 @@ import "./styles.css";
 
 //get All fetch for list items
 const App = () => {
-  const URL = "http://localhost:3001/items";
+  // const URL = "http://localhost:3001/items";
+  const URL = "https://react-mvp-2kdk.onrender.com";
   const [items, setItems] = useState([]);
 
   //get all request
@@ -24,9 +25,9 @@ const App = () => {
   return (
     <div className="container">
       <Header />
-      <AddNew />
+      <AddNew URL={URL} />
 
-      <List className="list" items={items} setItems={setItems} />
+      <List className="list" items={items} setItems={setItems} URL={URL} />
       <Footer />
     </div>
   );

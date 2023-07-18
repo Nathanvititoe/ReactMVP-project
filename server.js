@@ -120,7 +120,6 @@ app.patch("/items/:id", async (req, res) => {
       "UPDATE shoppinglist SET item = $1, notes = $2, completed = $3 WHERE itemid = $4",
       [updatedItem.item, updatedItem.notes, updatedItem.completed, id]
     );
-console.log(req.body)
     res.status(200).send(updatedItem);
   } catch (err) {
     console.error(err);

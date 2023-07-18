@@ -33,11 +33,7 @@ const ListItems = ({ item, setItems }) => {
           <p onClick={handleDelete} id="deleteItem">
             x
           </p>
-          <Checkbox
-            item={item}
-            URL={URL}
-            setItems={setItems}
-          />
+          <Checkbox item={item} URL={URL} setItems={setItems} />
           <Item
             item={item}
             itemSelected={itemSelected}

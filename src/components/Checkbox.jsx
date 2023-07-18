@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 const Checkbox = ({ item, URL, setItems }) => {
-//sketch 
-const updatedCheckbox = {...item, completed:!item.completed};
+  //sketch
+  const updatedCheckbox = { ...item, completed: !item.completed };
   const handleClick = async () => {
-    item.completed = !(item.completed)
+    item.completed = !item.completed;
     await saveItem(updatedCheckbox);
   };
 
@@ -15,7 +15,7 @@ const updatedCheckbox = {...item, completed:!item.completed};
       },
       body: JSON.stringify({ completed: updatedCheckbox.completed }),
     });
-    
+
     if (res.ok) {
       setItems((prevItems) =>
         prevItems.map((prevItem) =>

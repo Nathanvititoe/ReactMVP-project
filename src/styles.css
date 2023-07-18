@@ -64,23 +64,26 @@ form {
   margin: 0rem 4rem 0rem 4rem;
 }
 
-#addNewItem, #addNewNotes {
+#addNewItem,
+#addNewNotes {
   padding: 0.4rem;
   margin: 2rem;
   border-radius: 4px;
   box-shadow: 1px 1px rgb(67, 68, 69);
 }
 
-#addNewItem:focus, #addNewNotes:focus, #addNewButton:hover {
-    border-color: rgb(85, 173, 228);
-    box-shadow: 0 0 8px 0 rgb(85, 173, 228);;
-  }
+#addNewItem:focus,
+#addNewNotes:focus,
+#addNewButton:hover {
+  border-color: rgb(85, 173, 228);
+  box-shadow: 0 0 8px 0 rgb(85, 173, 228);
+}
 
 #addNewButton {
-    padding: 0.4rem;
-    margin: 2rem;
-    border-radius: 4px;
-    box-shadow: 1px rgb(67, 68, 69);
+  padding: 0.4rem;
+  margin: 2rem;
+  border-radius: 4px;
+  box-shadow: 1px rgb(67, 68, 69);
 }
 
 #addItemh2 {

@@ -31,7 +31,7 @@ const Item = ({
       },
       body: JSON.stringify({ item: currentItem }),
     });
-  
+
     if (res.ok) {
       setItemSelected(false);
       setItems((prevItems) =>

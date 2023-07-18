@@ -26,11 +26,7 @@ const App = () => {
       <Header />
       <AddNew />
 
-      <List
-        className="list"
-        items={items}
-        setItems={setItems}
-      />
+      <List className="list" items={items} setItems={setItems} />
       <Footer />
     </div>
   );

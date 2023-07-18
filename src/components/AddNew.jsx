@@ -1,33 +1,32 @@
 import { useState, useEffect } from "react";
 
-const AddNew = ({completed}) => {
+const AddNew = ({ completed }) => {
   const URL = "http://localhost:3001/items";
   const [clicked, setClicked] = useState(false);
   const [item, setItem] = useState("");
   const [notes, setNotes] = useState("");
 
-
   const handleItemChange = (e) => {
     setItem(e.target.value);
-};
+  };
   const handleNotesChange = (e) => {
     setNotes(e.target.value);
-};
+  };
   const handleClick = () => {
     setClicked(true);
   };
-//post one request
-const postData = async () => {
-  const res = await fetch(URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({item, notes, completed}),
-  });
-};
-useEffect(() => {
-    if(item) {
+  //post one request
+  const postData = async () => {
+    const res = await fetch(URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ item, notes, completed }),
+    });
+  };
+  useEffect(() => {
+    if (item) {
       postData();
     }
   }, []);
@@ -35,7 +34,7 @@ useEffect(() => {
   if (clicked) {
     return (
       <div className="addNewDivFormDiv">
-        <form onSubmit={postData} >
+        <form onSubmit={postData}>
           <input
             id="addNewItem"
             type="text"
@@ -43,7 +42,7 @@ useEffect(() => {
             value={item}
             placeholder="What item do you want?"
             onChange={handleItemChange}
-            />
+          />
           <input
             id="addNewNotes"
             type="text"
@@ -51,8 +50,10 @@ useEffect(() => {
             placeholder="notes..."
             value={notes}
             onChange={handleNotesChange}
-            />
-          <button type="submit" className="addNewButton">Add To List</button>
+          />
+          <button type="submit" className="addNewButton">
+            Add To List
+          </button>
         </form>
       </div>
     );

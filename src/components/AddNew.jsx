@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 
-const AddNew = ({ completed, URL }) => {
+const AddNew = ({ completed, URL, getData }) => {
   const [clicked, setClicked] = useState(false);
   const [item, setItem] = useState("");
   const [notes, setNotes] = useState("");
 
+  
   const handleItemChange = (e) => {
     setItem(e.target.value);
   };
@@ -24,6 +25,7 @@ const AddNew = ({ completed, URL }) => {
       },
       body: JSON.stringify({ item, notes, completed }),
     });
+    getData();
   };
   useEffect(() => {
     if (item) {

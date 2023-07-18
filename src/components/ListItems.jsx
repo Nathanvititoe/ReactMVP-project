@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Item from "./Item.jsx";
 import Notes from "./Notes.jsx";
 
-const ListItems = ({ item, setItems, URL }) => {
+const ListItems = ({ item, setItems, URL, getData }) => {
   const [notes, setNotes] = useState("");
   const [currentItem, setCurrentItem] = useState("");
   const [itemSelected, setItemSelected] = useState(false);
@@ -32,7 +32,7 @@ const ListItems = ({ item, setItems, URL }) => {
           <p onClick={handleDelete} id="deleteItem">
             x
           </p>
-          <Checkbox item={item} URL={URL} setItems={setItems} />
+          <Checkbox item={item} URL={URL} setItems={setItems} getData={getData}/>
           <Item
             item={item}
             itemSelected={itemSelected}
@@ -41,6 +41,7 @@ const ListItems = ({ item, setItems, URL }) => {
             setCurrentItem={setCurrentItem}
             URL={URL}
             setItems={setItems}
+            getData={getData}
           />
         </div>
         <Notes
@@ -51,6 +52,7 @@ const ListItems = ({ item, setItems, URL }) => {
           notesSelected={notesSelected}
           URL={URL}
           setItems={setItems}
+          getData={getData}
         />
       </div>
     </>

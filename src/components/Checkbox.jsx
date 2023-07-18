@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-const Checkbox = ({ item, URL, setItems }) => {
+const Checkbox = ({ item, URL, setItems, getData }) => {
   //sketch
   const updatedCheckbox = { ...item, completed: !item.completed };
   const handleClick = async () => {
@@ -26,6 +26,7 @@ const Checkbox = ({ item, URL, setItems }) => {
         )
       );
     }
+    getData();
   };
 
   return (

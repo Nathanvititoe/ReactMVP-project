@@ -13,21 +13,23 @@ const App = () => {
   const [items, setItems] = useState([]);
 
   //get all request
+
+  const getData = async () => {
+    const res = await fetch(URL);
+    const data = await res.json();
+    setItems(data);
+  };
+
   useEffect(() => {
-    const getData = async () => {
-      const res = await fetch(URL);
-      const data = await res.json();
-      setItems(data);
-    };
     getData();
   }, []);
 
   return (
     <div className="container">
       <Header />
-      <AddNew URL={URL} />
+      <AddNew URL={URL} getData={getData} />
 
-      <List className="list" items={items} setItems={setItems} URL={URL} />
+      <List className="list" items={items} setItems={setItems} URL={URL} getData={getData}/>
       <Footer />
     </div>
   );

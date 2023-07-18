@@ -8,6 +8,7 @@ const Notes = ({
   URL,
   setItems,
   notes,
+  getData
 }) => {
   const [submitted, setSubmitted] = useState(false);
 
@@ -44,6 +45,7 @@ const Notes = ({
         )
       );
     }
+    getData();
   };
 
   useEffect(() => {

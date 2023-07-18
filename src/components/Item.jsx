@@ -8,6 +8,7 @@ const Item = ({
   setCurrentItem,
   URL,
   setItems,
+  getData
 }) => {
   const [submitted, setSubmitted] = useState(false);
 
@@ -43,6 +44,7 @@ const Item = ({
         )
       );
     }
+    getData();
   };
 
   useEffect(() => {

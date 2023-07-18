@@ -1,6 +1,6 @@
 import ListItems from "./ListItems";
 
-const List = ({ items, setItems, URL }) => {
+const List = ({ items, setItems, URL, getData }) => {
   return items.map((item, index) => (
     <ListItems
       item={item}
@@ -8,6 +8,7 @@ const List = ({ items, setItems, URL }) => {
       items={items}
       setItems={setItems}
       URL={URL}
+      getData={getData}
     />
   ));
 };

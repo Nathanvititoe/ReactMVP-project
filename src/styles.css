@@ -203,4 +203,24 @@ form {
     text-decoration: line-through;
     color: rgba(0, 0, 0, 0.5);
   }
+
+  .addNewDiv {
+    display: flex;
+    border: 2px solid black;
+    /* margin: 1rem 6rem 2rem 6rem;
+    padding: 1.5rem 10rem; */
+    justify-content: space-evenly;
+    transition: ease all 0.5s;
+    cursor: pointer;
+  }
+
+  #headDiv {
+    display: flex;
+    justify-content: center;
+    /* padding: 1.5rem;
+    margin: 1rem 0rem 0.25rem 0rem; */
+    background-color: rgb(85, 173, 228);
+    border-top: 2px solid rgb(21, 21, 21);
+    border-bottom: 2px solid rgb(21, 21, 21);
+  }
 }

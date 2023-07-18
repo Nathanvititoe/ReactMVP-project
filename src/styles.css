@@ -224,3 +224,144 @@ form {
     border-bottom: 2px solid rgb(21, 21, 21);
   }
 }
+/* TEST */
+@media (min-width: 300px) and (max-width: 670px) {
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: "Kalam", cursive;
+    background-color: #fffdfd;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .myCheckbox:hover {
+    background-color: #f4f1f1;
+  }
+
+  #headDiv {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    background-color: rgb(85, 173, 228);
+    border-top: 2px solid rgb(21, 21, 21);
+    border-bottom: 2px solid rgb(21, 21, 21);
+  }
+
+  #title {
+    font-size: 2rem;
+    text-shadow: 2px 2px #c2bebe;
+  }
+
+  .addNewDiv {
+    display: flex;
+    border: 2px solid black;
+    margin: 1rem;
+    padding: 0.8rem;
+    justify-content: space-evenly;
+    transition: ease all 0.5s;
+    cursor: pointer;
+  }
+
+  .addNewDivFormDiv {
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid black;
+    margin: 0.5rem;
+    box-shadow: 0px 3px 0px 0px rgb(85, 173, 228);
+  }
+
+  form {
+    margin: 0rem 0.5rem;
+  }
+
+  .addNewItem {
+    padding: 0.3rem;
+    margin: 0.8rem;
+    border-radius: 4px;
+    box-shadow: 1px 1px rgb(67, 68, 69);
+  }
+
+  .addNewItem:focus,
+  .addNewButton:hover {
+    border-color: rgb(85, 173, 228);
+    box-shadow: 0 0 8px 0 rgb(85, 173, 228);
+  }
+
+  .addNewButton {
+    padding: 0.3rem;
+    margin: 0.8rem;
+    border-radius: 4px;
+    box-shadow: 1px rgb(67, 68, 69);
+  }
+
+  #addItemh2 {
+    transition: ease all 0.5s;
+  }
+
+  #addItemh2:hover {
+    transform: scale(1.2);
+  }
+
+  .listItemsDiv,
+  .listItemsDivClicked {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 2px solid black;
+    margin: 0.5rem;
+    padding: 0.8rem;
+    justify-content: center;
+    box-shadow: 0px 3px 0px 0px rgb(85, 173, 228);
+    transition: ease-in-out all 0.2s;
+  }
+
+  .listItemsDivClicked {
+    text-decoration: line-through;
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  #checkAndItem {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 1rem;
+  }
+
+  #itemh2 {
+    padding: 0.3rem;
+    font-size: 1.2rem;
+  }
+
+  #notes {
+    opacity: 0.6;
+  }
+
+  #check {
+    display: flex;
+    padding: 0.3rem;
+    margin-right: 1.5rem;
+  }
+
+  .myCheckbox {
+    cursor: pointer;
+    transform: scale(1.5);
+  }
+
+  #deleteItem {
+    display: flex;
+    align-items: center;
+    padding-right: 0.5rem;
+    font-size: 1.2rem;
+    color: rgb(196, 47, 47);
+    text-shadow: 0.5px 0.5px black;
+    transition: ease all 0.5s;
+    cursor: pointer;
+  }
+
+  #deleteItem:hover {
+    transform: scale(1.3);
+  }
+}

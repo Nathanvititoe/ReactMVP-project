@@ -1,25 +1,57 @@
 import { useState, useEffect } from "react";
 
-const Item = ({ item, itemSelected, setItemSelected, setSubmitted, currentItem, setCurrentItem }) => {
-  
-  
+const Item = ({
+  item,
+  itemSelected,
+  setItemSelected,
+  currentItem,
+  setCurrentItem,
+  URL,
+  setItems,
+}) => {
+  const [submitted, setSubmitted] = useState(false);
+
   const handleClickItem = (e) => {
     setItemSelected(true);
   };
 
   const handleItemChange = (e) => {
-    // const index = items.indexOf(item);
     setCurrentItem(e.target.value);
-    // items[index].item = currentItem;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitted(true)
-  }
+    setSubmitted(true);
+  };
+  const saveItem = async () => {
+    const res = await fetch(`${URL}/${item.itemid}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ item: currentItem }),
+    });
   
-  
- useEffect(() => {
+    if (res.ok) {
+      setItemSelected(false);
+      setItems((prevItems) =>
+        prevItems.map((prevItem) =>
+          prevItem.itemid === item.itemid
+            ? { ...prevItem, item: currentItem }
+            : prevItem
+        )
+      );
+    }
+  };
+
+  useEffect(() => {
+    if (submitted) {
+      saveItem();
+      setSubmitted(false);
+    }
+  }, [submitted]);
+
+  useEffect(() => {
     if (itemSelected && currentItem !== item.item) {
       setCurrentItem(item.item);
     }
@@ -29,10 +61,7 @@ const Item = ({ item, itemSelected, setItemSelected, setSubmitted, currentItem, 
     return (
       <>
         <form onSubmit={handleSubmit}>
-          <input 
-          value={currentItem}
-          onChange={handleItemChange} 
-          />
+          <input value={currentItem} onChange={handleItemChange} />
           <button type="submit" className="addNewButton">
             save
           </button>

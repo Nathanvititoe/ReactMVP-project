@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Notes = ({
   setNotes,
   item,
   notesSelected,
   setNotesSelected,
+  URL,
+  setItems,
+  notes
 }) => {
+  const [submitted, setSubmitted] = useState(false);
+
   const handleClickNotes = () => {
     setNotesSelected(true);
   };
@@ -14,31 +19,54 @@ const Notes = ({
     setNotes(e.target.value);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     await saveItem();
   };
 
   const saveItem = async () => {
     const res = await fetch(`${URL}/${item.itemid}`, {
-      method: "PUT",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ item: currentItem, notes: notes }),
+      body: JSON.stringify({ notes }),
     });
+  
     if (res.ok) {
-      setItemSelected(false);
       setNotesSelected(false);
+      setItems((prevItems) =>
+        prevItems.map((prevItem) =>
+          prevItem.itemid === item.itemid
+            ? { ...prevItem, notes: notes }
+            : prevItem
+        )
+      );
     }
   };
+
+  useEffect(() => {
+    if (submitted) {
+      saveItem();
+      setSubmitted(false);
+    }
+  }, [submitted]);
+
+  useEffect(() => {
+    if (notesSelected && notes !== item.notes) {
+      setNotes(item.notes);
+    }
+  }, [notesSelected, item.notes]);
 
   if (notesSelected) {
     return (
       <>
-        <input onChange={handleNotesChange} />
-        <button type="button" onClick={handleSubmit}>
-          save
-        </button>
+        <form onSubmit={handleSubmit}>
+          <input value={notes} onChange={handleNotesChange} />
+          <button type="submit" className="addNewButton">
+            save
+          </button>
+        </form>
       </>
     );
   } else {

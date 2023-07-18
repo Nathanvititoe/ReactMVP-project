@@ -94,25 +94,39 @@ app.delete("/items/:item", async (req, res) => {
 });
 
 //create put/update route
-app.put("/items/:id", async (req, res) => {
+app.patch("/items/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { item, notes } = req.body;
-    const results = await client.query(
-      "UPDATE shoppinglist SET item = $1, notes = $2 WHERE itemid = $3",
-      [item, notes, id]
+
+    const currentItem = await client.query(
+      "SELECT item, notes FROM shoppinglist WHERE itemid = $1",
+      [id]
     );
-    if (results.rows === 0) {
-      console.log("item not found");
-      res.status(404).send("item not found");
+
+    if (currentItem.rows.length === 0) {
+      console.log("Item not found");
+      res.status(404).send("Item not found");
       return;
     }
-    res.status(200).send(results.rows[0]);
+
+    const updatedItem = {
+      item: item || currentItem.rows[0].item, // Retain previous value if not provided
+      notes: notes || currentItem.rows[0].notes, // Retain previous value if not provided
+    };
+
+    const results = await client.query(
+      "UPDATE shoppinglist SET item = $1, notes = $2 WHERE itemid = $3",
+      [updatedItem.item, updatedItem.notes, id]
+    );
+
+    res.status(200).send(updatedItem);
   } catch (err) {
     console.error(err);
     res.status(500).send(err);
-  } 
+  }
 });
+
 
 //create listener
 app.listen(PORT, () => {

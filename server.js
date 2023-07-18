@@ -47,8 +47,8 @@ app.get("/items/:id", async (req, res) => {
       "SELECT * FROM shoppinglist WHERE itemid = $1",
       [id]
     );
-    if(!results.rows[0]) {
-      res.send('item not found').status(404);
+    if (!results.rows[0]) {
+      res.send("item not found").status(404);
       return;
     }
     res.send(results.rows[0]).status(200);
@@ -113,7 +113,8 @@ app.patch("/items/:id", async (req, res) => {
     const updatedItem = {
       item: item || currentItem.rows[0].item, // Retain previous value if not provided
       notes: notes || currentItem.rows[0].notes, // Retain previous value if not provided
-      completed:completed !== undefined ? completed : currentItem.rows[0].completed // Retain previous value if not provided
+      completed:
+        completed !== undefined ? completed : currentItem.rows[0].completed, // Retain previous value if not provided
     };
 
     const results = await client.query(
@@ -126,7 +127,6 @@ app.patch("/items/:id", async (req, res) => {
     res.status(500).send(err);
   }
 });
-
 
 //create listener
 app.listen(PORT, () => {

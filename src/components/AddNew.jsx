@@ -36,7 +36,7 @@ const AddNew = ({ completed }) => {
       <div className="addNewDivFormDiv">
         <form onSubmit={postData}>
           <input
-            id="addNewItem"
+            className="addNewItem"
             type="text"
             name="item"
             value={item}
@@ -44,7 +44,7 @@ const AddNew = ({ completed }) => {
             onChange={handleItemChange}
           />
           <input
-            id="addNewNotes"
+            className="addNewItem"
             type="text"
             name="notes"
             placeholder="notes..."

@@ -62,7 +62,7 @@ const Notes = ({
     return (
       <>
         <form onSubmit={handleSubmit}>
-          <input value={notes} onChange={handleNotesChange} />
+          <input value={notes} onChange={handleNotesChange} className="addNewItem"/>
           <button type="submit" className="addNewButton">
             save
           </button>

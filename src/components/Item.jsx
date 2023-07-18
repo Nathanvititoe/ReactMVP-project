@@ -61,7 +61,7 @@ const Item = ({
     return (
       <>
         <form onSubmit={handleSubmit}>
-          <input value={currentItem} onChange={handleItemChange} />
+          <input value={currentItem} onChange={handleItemChange} className="addNewItem"/>
           <button type="submit" className="addNewButton">
             save
           </button>
@@ -70,7 +70,7 @@ const Item = ({
     );
   } else {
     return (
-      <h2 id="itemh2" onClick={handleClickItem}>
+      <h2 id="itemh2" onClick={handleClickItem} >
         {item.item}
       </h2>
     );

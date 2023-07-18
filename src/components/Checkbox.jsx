@@ -27,7 +27,7 @@ const Checkbox = ({ item, URL, setItems, getData }) => {
     }
     getData();
   };
-console.log(item.completed)
+// console.log(item.completed)
   return (
     <div id="check">
       <input

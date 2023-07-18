@@ -9,7 +9,7 @@ import "./styles.css";
 //get All fetch for list items
 const App = () => {
   // const URL = "http://localhost:3001/items";
-  const URL = "https://react-mvp-2kdk.onrender.com";
+  const URL = "/items";
   const [items, setItems] = useState([]);
 
   //get all request

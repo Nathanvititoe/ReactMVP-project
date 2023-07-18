@@ -26,7 +26,7 @@ const AddNew = ({ completed, URL, getData }) => {
       body: JSON.stringify({ item, notes, completed }),
     });
     getData();
-    e.target.reset();
+    setClicked(false)
   };
   useEffect(() => {
     if (item) {

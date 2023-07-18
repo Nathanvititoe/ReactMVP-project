@@ -18,7 +18,7 @@ const db_conn = new Pool({
 
 // const PORT = 3001;
 const PORT = process.env.PORT;
-app.use(express.static("public"));
+app.use(express.static("dist"));
 app.use(express.json());
 app.use(cors({ origin: "*" }));
 

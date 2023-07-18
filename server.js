@@ -61,10 +61,10 @@ app.get("/items/:id", async (req, res) => {
 //create POST/WRITE ONE route
 app.post("/items", async (req, res) => {
   try {
-    const { item, notes } = req.body;
+    const { item, notes, completed } = req.body;
     const results = await client.query(
-      "INSERT INTO shoppinglist(item, notes)VALUES($1, $2)",
-      [item, notes]
+      "INSERT INTO shoppinglist(item, notes,completed)VALUES($1, $2, $3)",
+      [item, notes, completed]
     );
     res.send(results.rows).status(201);
   } catch (err) {
@@ -74,12 +74,12 @@ app.post("/items", async (req, res) => {
 });
 
 //Create DELETE route
-app.delete("/items/:item", async (req, res) => {
+app.delete("/items/:id", async (req, res) => {
   try {
-    const { item } = req.params;
+    const { id } = req.params;
     const results = await client.query(
       "DELETE FROM shoppinglist WHERE itemid = $1",
-      [item]
+      [id]
     );
     if (!results.rows) {
       console.log("that item does not exist");
@@ -97,10 +97,10 @@ app.delete("/items/:item", async (req, res) => {
 app.patch("/items/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { item, notes } = req.body;
+    const { item, notes, completed } = req.body;
 
     const currentItem = await client.query(
-      "SELECT item, notes FROM shoppinglist WHERE itemid = $1",
+      "SELECT item, notes, completed FROM shoppinglist WHERE itemid = $1",
       [id]
     );
 
@@ -113,11 +113,12 @@ app.patch("/items/:id", async (req, res) => {
     const updatedItem = {
       item: item || currentItem.rows[0].item, // Retain previous value if not provided
       notes: notes || currentItem.rows[0].notes, // Retain previous value if not provided
+      completed: completed || currentItem.rows[0].completed // Retain previous value if not provided
     };
 
     const results = await client.query(
-      "UPDATE shoppinglist SET item = $1, notes = $2 WHERE itemid = $3",
-      [updatedItem.item, updatedItem.notes, id]
+      "UPDATE shoppinglist SET item = $1, notes = $2, completed = $3 WHERE itemid = $4",
+      [updatedItem.item, updatedItem.notes, updatedItem.completed, id]
     );
 
     res.status(200).send(updatedItem);

@@ -8,6 +8,7 @@ const Item = ({
   setCurrentItem,
   URL,
   setItems,
+  setCompleted
 }) => {
   const [submitted, setSubmitted] = useState(false);
 

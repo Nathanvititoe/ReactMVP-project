@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const AddNew = () => {
+const AddNew = ({completed}) => {
   const URL = "http://localhost:3001/items";
   const [clicked, setClicked] = useState(false);
   const [item, setItem] = useState("");
@@ -23,7 +23,7 @@ const postData = async () => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({item, notes}),
+    body: JSON.stringify({item, notes, completed}),
   });
 };
 useEffect(() => {
@@ -41,7 +41,7 @@ useEffect(() => {
             type="text"
             name="item"
             value={item}
-            placeholder="What Item do you want?"
+            placeholder="What item do you want?"
             onChange={handleItemChange}
             />
           <input

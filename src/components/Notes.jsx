@@ -7,7 +7,8 @@ const Notes = ({
   setNotesSelected,
   URL,
   setItems,
-  notes
+  notes,
+  setCompleted,
 }) => {
   const [submitted, setSubmitted] = useState(false);
 
@@ -30,9 +31,9 @@ const Notes = ({
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ notes }),
+      body: JSON.stringify({ notes: notes }),
     });
-  
+
     if (res.ok) {
       setNotesSelected(false);
       setItems((prevItems) =>

@@ -9,7 +9,7 @@ const { Pool } = pg;
 const db_conn = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
-// const client = new Pool({
+// const db_conn = new Pool({
 //   host: "localhost",
 //   user: "postgres",
 //   port: 5432,

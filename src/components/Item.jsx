@@ -25,7 +25,7 @@ const Item = ({
     setSubmitted(true);
   };
   const saveItem = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const res = await fetch(`${URL}/${item.itemid}`, {
       method: "PATCH",
       headers: {

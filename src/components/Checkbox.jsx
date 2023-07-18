@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 const Checkbox = ({ item, URL, setItems, getData }) => {
-  //sketch
   const updatedCheckbox = { ...item, completed: !item.completed };
   const handleClick = async () => {
     item.completed = !item.completed;
@@ -8,7 +7,7 @@ const Checkbox = ({ item, URL, setItems, getData }) => {
   };
 
   const saveItem = async (e, updatedCheckbox) => {
-    e.preventDefault();
+    // e.preventDefault();
     const res = await fetch(`${URL}/${item.itemid}`, {
       method: "PATCH",
       headers: {

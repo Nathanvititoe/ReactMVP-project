@@ -225,7 +225,7 @@ form {
   }
 }
 /* TEST */
-@media (min-width: 300px) and (max-width: 670px) {
+@media (max-width: 670px) {
   body {
     margin: 0;
     padding: 0;

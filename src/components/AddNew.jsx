@@ -27,6 +27,8 @@ const AddNew = ({ completed, URL, getData }) => {
     });
     getData();
     setClicked(false)
+    setNotes("");
+    setItem("");
   };
   useEffect(() => {
     if (item) {
